@@ -64,6 +64,12 @@
 		BF21F6801C0DB0F9007890F6 /* KPViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF1C077C1C0DA95600A67462 /* KPViewController.h */; };
 		BF21F6811C0DB0F9007890F6 /* ChromecastDeviceController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF1C077F1C0DA96700A67462 /* ChromecastDeviceController.h */; };
 		BF21F6821C0DB0F9007890F6 /* WViPhoneAPI.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BF1C07501C0DA7E800A67462 /* WViPhoneAPI.h */; };
+		BF8653BA1CD5FC880055F183 /* KChromecastDeviceControlller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8653B91CD5FC880055F183 /* KChromecastDeviceControlller.swift */; };
+		BF8653F51CD659E90055F183 /* KPViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BF1C077C1C0DA95600A67462 /* KPViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFAA1E021CD6629F00D5FE5F /* KPLog.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBE8E641C0B139400649BDF /* KPLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFAA1E041CD662FC00D5FE5F /* KPLogManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBE8E661C0B139400649BDF /* KPLogManager.h */; };
+		BFAA1E051CD6630300D5FE5F /* KPPlayerConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = BF1C07791C0DA93700A67462 /* KPPlayerConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFAA1E061CD663F900D5FE5F /* KPViewControllerProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBE8E6F1C0B139400649BDF /* KPViewControllerProtocols.h */; };
 		BFBE8E851C0B139400649BDF /* CachedStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFBE8E501C0B139400649BDF /* CachedStrings.plist */; };
 		BFBE8E861C0B139400649BDF /* DeviceParamsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8E521C0B139400649BDF /* DeviceParamsHandler.m */; };
 		BFBE8E871C0B139400649BDF /* EmailStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBE8E541C0B139400649BDF /* EmailStrategy.m */; };
@@ -230,6 +236,11 @@
 		BF1C077F1C0DA96700A67462 /* ChromecastDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChromecastDeviceController.h; path = KALTURAPlayerSDK/ChromecastDeviceController.h; sourceTree = SOURCE_ROOT; };
 		BF1C07801C0DA96700A67462 /* ChromecastDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChromecastDeviceController.m; path = KALTURAPlayerSDK/ChromecastDeviceController.m; sourceTree = SOURCE_ROOT; };
 		BF1C07821C0DA97F00A67462 /* PlayerSDK-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PlayerSDK-Prefix.pch"; path = "KALTURAPlayerSDK/PlayerSDK-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		BF8653B81CD5FC880055F183 /* KALTURAPlayerSDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KALTURAPlayerSDK-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		BF8653B91CD5FC880055F183 /* KChromecastDeviceControlller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KChromecastDeviceControlller.swift; path = ../KChromecastDeviceControlller.swift; sourceTree = "<group>"; };
+		BF8653DC1CD634EE0055F183 /* KalturaPlayerSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KalturaPlayerSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF8653DE1CD634EE0055F183 /* KalturaPlayerSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KalturaPlayerSDK.h; sourceTree = "<group>"; };
+		BF8653E01CD634EE0055F183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFBE8E501C0B139400649BDF /* CachedStrings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CachedStrings.plist; path = KALTURAPlayerSDK/CachedStrings.plist; sourceTree = SOURCE_ROOT; };
 		BFBE8E511C0B139400649BDF /* DeviceParamsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceParamsHandler.h; path = KALTURAPlayerSDK/DeviceParamsHandler.h; sourceTree = SOURCE_ROOT; };
 		BFBE8E521C0B139400649BDF /* DeviceParamsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceParamsHandler.m; path = KALTURAPlayerSDK/DeviceParamsHandler.m; sourceTree = SOURCE_ROOT; };
@@ -305,6 +316,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F6879D51C271304003E5DF7 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF8653D81CD634EE0055F183 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +465,15 @@
 			name = KPViewController;
 			sourceTree = "<group>";
 		};
+		BF8653DD1CD634EE0055F183 /* KalturaPlayerSDK */ = {
+			isa = PBXGroup;
+			children = (
+				BF8653DE1CD634EE0055F183 /* KalturaPlayerSDK.h */,
+				BF8653E01CD634EE0055F183 /* Info.plist */,
+			);
+			path = KalturaPlayerSDK;
+			sourceTree = "<group>";
+		};
 		BFA6F0D918BB796500F7C78F /* WideVine */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +498,7 @@
 				5F6879D41C271304003E5DF7 /* CoreFoundation.framework */,
 				BFFFA72C182F9E31005B3B24 /* KALTURAPlayerSDK */,
 				B372892F1A8787D00076DD33 /* KPlayerResources */,
+				BF8653DD1CD634EE0055F183 /* KalturaPlayerSDK */,
 				BFFFA728182F9E31005B3B24 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -480,6 +508,7 @@
 			children = (
 				BFFFA727182F9E31005B3B24 /* libKALTURAPlayerSDK.a */,
 				B372892E1A8787D00076DD33 /* KALTURAPlayerSDKResources.bundle */,
+				BF8653DC1CD634EE0055F183 /* KalturaPlayerSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -487,6 +516,8 @@
 		BFFFA72C182F9E31005B3B24 /* KALTURAPlayerSDK */ = {
 			isa = PBXGroup;
 			children = (
+				BF8653B81CD5FC880055F183 /* KALTURAPlayerSDK-Bridging-Header.h */,
+				BF8653B91CD5FC880055F183 /* KChromecastDeviceControlller.swift */,
 				BF0EA73F1C1051F100BD3CD1 /* KCCPlayer.h */,
 				BF0EA7401C1051F100BD3CD1 /* KCCPlayer.m */,
 				BF1C07531C0DA7F800A67462 /* NSBundle+Kaltura.h */,
@@ -545,6 +576,21 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		BF8653D91CD634EE0055F183 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF8653F51CD659E90055F183 /* KPViewController.h in Headers */,
+				BFAA1E021CD6629F00D5FE5F /* KPLog.h in Headers */,
+				BFAA1E051CD6630300D5FE5F /* KPPlayerConfig.h in Headers */,
+				BFAA1E061CD663F900D5FE5F /* KPViewControllerProtocols.h in Headers */,
+				BFAA1E041CD662FC00D5FE5F /* KPLogManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		B372892D1A8787D00076DD33 /* KALTURAPlayerSDKResources */ = {
 			isa = PBXNativeTarget;
@@ -562,6 +608,24 @@
 			productName = KPlayerResources;
 			productReference = B372892E1A8787D00076DD33 /* KALTURAPlayerSDKResources.bundle */;
 			productType = "com.apple.product-type.bundle";
+		};
+		BF8653DB1CD634EE0055F183 /* KalturaPlayerSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF8653E11CD634EE0055F183 /* Build configuration list for PBXNativeTarget "KalturaPlayerSDK" */;
+			buildPhases = (
+				BF8653D71CD634EE0055F183 /* Sources */,
+				BF8653D81CD634EE0055F183 /* Frameworks */,
+				BF8653D91CD634EE0055F183 /* Headers */,
+				BF8653DA1CD634EE0055F183 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KalturaPlayerSDK;
+			productName = KalturaPlayerSDK;
+			productReference = BF8653DC1CD634EE0055F183 /* KalturaPlayerSDK.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		BFFFA726182F9E31005B3B24 /* KALTURAPlayerSDK */ = {
 			isa = PBXNativeTarget;
@@ -588,6 +652,7 @@
 		BFFFA71F182F9E31005B3B24 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Kaltura;
@@ -600,6 +665,9 @@
 					};
 					BF7BB4AB1BC5371F0018C17B = {
 						CreatedOnToolsVersion = 6.4;
+					};
+					BF8653DB1CD634EE0055F183 = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
@@ -619,6 +687,7 @@
 				B372892D1A8787D00076DD33 /* KALTURAPlayerSDKResources */,
 				B3166DD01AF26C4700E99B77 /* Framework */,
 				BF7BB4AB1BC5371F0018C17B /* Documantation */,
+				BF8653DB1CD634EE0055F183 /* KalturaPlayerSDK */,
 			);
 		};
 /* End PBXProject section */
@@ -641,6 +710,13 @@
 				BFBE8E8C1C0B139400649BDF /* KPBrowserViewController.xib in Resources */,
 				BFBE8E961C0B139400649BDF /* KPWebKitBrowserViewController.xib in Resources */,
 				BFBE8E851C0B139400649BDF /* CachedStrings.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF8653DA1CD634EE0055F183 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +760,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF8653D71CD634EE0055F183 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFFFA723182F9E31005B3B24 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -695,6 +778,7 @@
 				BF1C07581C0DA7F800A67462 /* NSBundle+Kaltura.m in Sources */,
 				BF1C076C1C0DA8A600A67462 /* KPlayerFactory.m in Sources */,
 				FB7D10701C46E81500FBB906 /* KPLocalAssetsManager.m in Sources */,
+				BF8653BA1CD5FC880055F183 /* KChromecastDeviceControlller.swift in Sources */,
 				BFBE8E891C0B139400649BDF /* GoogleplusStrategy.m in Sources */,
 				BF1C077E1C0DA95600A67462 /* KPViewController.m in Sources */,
 				BFBE8E931C0B139400649BDF /* KPURLProtocol.m in Sources */,
@@ -861,10 +945,108 @@
 			};
 			name = Release;
 		};
+		BF8653E21CD634EE0055F183 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = KalturaPlayerSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kaltura.KalturaPlayerSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		BF8653E31CD634EE0055F183 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = KalturaPlayerSDK/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kaltura.KalturaPlayerSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		BFFFA74A182F9E31005B3B24 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
@@ -895,7 +1077,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/WViPhoneAPI.h\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/libWViPhoneAPI.a\"",
 					"\"$(SRCROOT)/libGoogleIMA3.a\"",
@@ -911,7 +1093,7 @@
 		BFFFA74B182F9E31005B3B24 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
@@ -934,7 +1116,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/WViPhoneAPI.h\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/libWViPhoneAPI.a\"",
@@ -973,6 +1155,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -987,6 +1171,8 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
+				SWIFT_OBJC_BRIDGING_HEADER = "KALTURAPlayerSDK-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "arm64 armv7 i386";
 			};
 			name = Debug;
@@ -1015,7 +1201,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 5.1.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1029,6 +1217,7 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
+				SWIFT_OBJC_BRIDGING_HEADER = "KALTURAPlayerSDK-Bridging-Header.h";
 				VALID_ARCHS = "arm64 armv7 i386";
 			};
 			name = Release;
@@ -1059,6 +1248,15 @@
 			buildConfigurations = (
 				BF7BB4AC1BC5371F0018C17B /* Debug */,
 				BF7BB4AD1BC5371F0018C17B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF8653E11CD634EE0055F183 /* Build configuration list for PBXNativeTarget "KalturaPlayerSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF8653E21CD634EE0055F183 /* Debug */,
+				BF8653E31CD634EE0055F183 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
