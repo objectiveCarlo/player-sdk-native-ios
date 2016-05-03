@@ -8,11 +8,9 @@
 
 import Foundation
 
-class KChromecastDeviceControlller: GCKDeviceScannerListener,
-                                    GCKDeviceManagerDelegate,
-                                    GCKMediaControlChannelDelegate {
+class KChromecastDeviceControlller {
     
-    var scanner: GCKDeviceScanner?
+//    var scanner: GCKDeviceScanner?
     
     
 }
