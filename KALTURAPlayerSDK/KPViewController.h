@@ -20,6 +20,7 @@
 #import "KPViewControllerProtocols.h"
 #import "KPPlayerConfig.h"
 #import "KPController.h"
+#import "KRouterManager.h"
 
 @class KPViewController;
 @protocol KPViewControllerDelegate <NSObject>
@@ -38,7 +39,7 @@
 
 @end
 
-#import "ChromecastDeviceController.h"
+//#import "ChromecastDeviceController.h"
 
 
 @interface KPViewController : UIViewController
@@ -289,7 +290,8 @@ typedef NS_ENUM(NSInteger, KDPAPIState) {
 @property (nonatomic, copy, readonly) void (^triggerEvent)(NSString *event, NSString *value);
 
 /* The device manager used for the currently casting media. */
-@property(weak, nonatomic) ChromecastDeviceController *castDeviceController;
+//@property(weak, nonatomic) ChromecastDeviceController *castDeviceController;
+@property(weak, nonatomic) KRouterManager *castDeviceController;
 
 @end
 

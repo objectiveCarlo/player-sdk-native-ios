@@ -29,6 +29,7 @@ static NSString *AppConfigurationFileName = @"AppConfigurations";
 #import "NSDictionary+Utilities.h"
 #import "KPAssetBuilder.h"
 #import "KPPlayerConfig_Private.h"
+#import "KRouterManager_Private.h"
 
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -47,8 +48,8 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 
 @interface KPViewController() <KPlayerFactoryDelegate,
                                 KPControlsViewDelegate,
-                                UIActionSheetDelegate,
-                                ChromecastDeviceControllerDelegate, KPControllerDelegate> {
+                                UIActionSheetDelegate, KRouterManagerDelegate,
+                                KPControllerDelegate> {
     // Player Params
     BOOL isFullScreen, isPlaying, isResumePlayer;
     NSDictionary *appConfigDict;
@@ -279,7 +280,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:NO];
     // Assign ourselves as delegate ONLY in viewWillAppear of a view controller.
-    [ChromecastDeviceController sharedInstance].delegate = self;
+    [KRouterManager sharedInstance].delegate = self;
     NSLog(@"%@", [NSValue valueWithCGRect:((UIView *)self.controlsView).frame]);
 }
 
@@ -357,7 +358,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         }
     }];
     
-    self.castDeviceController = [ChromecastDeviceController sharedInstance];
+    self.castDeviceController = [KRouterManager sharedInstance];
     if (self.castDeviceController) {
         [[NSNotificationCenter defaultCenter] addObserver: self
                                                  selector: @selector(handleCastScanStatusUpdated)
@@ -369,7 +370,7 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         // Turn on the Cast logging for debug purposes.
         [self.castDeviceController enableLogging];
         // Set the receiver application ID to initialise scanning.
-        [self.castDeviceController setApplicationID:@"DB6462E9"];
+//        [self.castDeviceController setApplicationID:@"DB6462E9"];
     }
     
     [super viewDidLoad];
@@ -856,6 +857,8 @@ NSString *const KPErrorDomain = @"com.kaltura.player";
         case captions:
 //            _playerController changeSubtitleLanguage
             break;
+        case chromecastAppId:
+            NSLog(@"");
         default:
             KPLogDebug(@"Unhandled attribute: %@=%@", attributeName, attributeVal);
             break;

@@ -40,7 +40,8 @@ typedef enum{
     nativeAction,
     doubleClickRequestAds,
     language,
-    captions
+    captions,
+    chromecastAppId
 } Attribute;
 
 @protocol KPlayerDelegate;

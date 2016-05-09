@@ -12,6 +12,7 @@ static NSString *licenseUriKey = @"licenseUri";
 static NSString *NativeActionKey = @"nativeAction";
 
 NSString *const LocalContentId = @"localContentId";
+NSString *const ChromecastAppId = @"chromecastAppId";
 
 #import "NSString+Utilities.h"
 #import "KPLog.h"
@@ -76,7 +77,8 @@ NSString *const LocalContentId = @"localContentId";
                             @"nativeAction",
                             @"doubleClickRequestAds",
                             @"language",
-                            @"textTrackSelected"];
+                            @"textTrackSelected",
+                            @"chromecastAppId"];
     KPLogTrace(@"Exit");
     return (Attribute)[attributes indexOfObject:self];
 }
