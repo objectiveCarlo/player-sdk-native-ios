@@ -26,12 +26,7 @@
 @implementation KPAssetBuilder
 
 -(BOOL)requiresBackToForegroundHandling {
-    if ([self.assetHandler respondsToSelector:@selector(backToForeground)]) {
-        KPLogTrace(@"requiresBackToForegroundHandling");
-        return YES;
-    }
-    
-    return NO;
+    return [self.assetHandler respondsToSelector:@selector(backToForeground)];
 }
 
 -(void)backToForeground {

@@ -31,8 +31,8 @@
 
 - (void)backToForeground {
     KPLogTrace(@"Enter backToForeground");
-    if ([_assetBuilder requiresBackToForegroundHandling]) {
-        _lastPosition = [self.player currentPlaybackTime];
+    if (_assetBuilder.requiresBackToForegroundHandling) {
+        _lastPosition = self.player.currentPlaybackTime;
         _backToForeground = YES;
         [_assetBuilder backToForeground];
     }
