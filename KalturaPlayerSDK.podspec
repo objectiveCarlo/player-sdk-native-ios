@@ -27,9 +27,6 @@ s.authors             = { "Eliza Sapir" => "eliza.sapir@gmail.com", "Nissim Pard
 
 
 
-# ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-s.platform     = :ios, "8.0"
-
 
 
 # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
