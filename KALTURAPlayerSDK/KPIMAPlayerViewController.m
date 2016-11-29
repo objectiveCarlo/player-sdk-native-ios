@@ -67,7 +67,7 @@
 }
 
 - (void)contentCompleted {
-// Notify IMA SDK when content is done for post-rolls.
+    // Notify IMA SDK when content is done for post-rolls.
     [self.adsLoader contentComplete];
 }
 
@@ -176,7 +176,7 @@
     // Something went wrong loading ads. Log the error and play the content.
     KPLogError(@"Error loading ads: %@", adErrorData.adError.message);
     
-     NSDictionary *eventParams = AdsLoadErrorKey.nullVal;
+    NSDictionary *eventParams = AdsLoadErrorKey.nullVal;
     [self.delegate player:nil
                 eventName:eventParams.allKeys.firstObject
                      JSON:eventParams.allValues.firstObject];
@@ -211,14 +211,14 @@
             
             break;
         case kIMAAdEvent_STARTED:
-            self.view.hidden = NO;
+            [self showMe];
             self.adEventParams.duration = event.ad.duration;
             eventParams = self.adEventParams.toJSON.adStart;
             break;
         case kIMAAdEvent_COMPLETE:
             self.adEventParams.adID = event.ad.adId;
             eventParams = self.adEventParams.toJSON.adCompleted;
-            self.view.hidden = YES;
+            [self hideMe];
             break;
         case kIMAAdEvent_ALL_ADS_COMPLETED:
             eventParams = AllAdsCompletedKey.nullVal;
@@ -255,11 +255,21 @@
     }
 }
 
+- (void)hideMe {
+    [self.view setHidden:YES];
+    self.view.userInteractionEnabled = NO;
+}
+
+- (void)showMe {
+    [self.view.superview bringSubviewToFront:self.view];
+    [self.view setHidden:NO];
+    self.view.userInteractionEnabled = YES;
+}
+
 - (void)adsManagerDidRequestContentPause:(id<AdsManager>)adsManager {
     // The SDK is going to play ads, so pause the content.
-    [self.view.superview bringSubviewToFront:self.view];
     [self.contentPlayer pause];
-    [self.view setHidden:NO];
+    [self showMe];
     NSDictionary *eventParams = ContentPauseRequestedKey.nullVal;
     [self.delegate player:nil
                 eventName:eventParams.allKeys.firstObject
@@ -269,7 +279,7 @@
 - (void)adsManagerDidRequestContentResume:(id<AdsManager>)adsManager {
     // The SDK is done playing ads (at least for now), so resume the content.
     [self.contentPlayer play];
-    [self.view setHidden:YES];
+    [self hideMe];
     NSDictionary *eventParams = ContentResumeRequestedKey.nullVal;
     [self.delegate player:nil
                 eventName:eventParams.allKeys.firstObject
