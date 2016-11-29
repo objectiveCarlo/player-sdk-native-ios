@@ -158,6 +158,7 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
         _adController.adPlayerHeight = _adPlayerHeight;
         _adController.locale = _locale;
         [_parentViewController addChildViewController:_adController];
+        [_adController.view setTag:7777];
         [_parentViewController.view addSubview:_adController.view];
         _adController.datasource = _kIMAWebOpenerDelegate;
         [_adController loadIMAAd:adTagURL

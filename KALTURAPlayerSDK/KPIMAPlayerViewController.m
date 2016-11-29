@@ -10,6 +10,7 @@
 #import "NSString+Utilities.h"
 #import "KPLog.h"
 #import "IMAHandler.h"
+#import "KCustomPlayHead.h"
 
 @interface KPIMAPlayerViewController ()
 
@@ -31,7 +32,7 @@
 /// Main point of interaction with the SDK. Created by the SDK as the result of an ad request.
 @property(nonatomic, strong) id<AdsManager> adsManager;
 
-@property (nonatomic, strong) id<AVPlayerContentPlayhead> playhead;
+@property (nonatomic, strong) id<IMAContentPlayhead> playhead;
 @end
 
 @implementation KPIMAPlayerViewController
@@ -59,6 +60,7 @@
     self.contentPlayer = contentPlayer;
     id<AdsRequest> request = [[NSClassFromString(@"IMAAdsRequest") alloc] initWithAdTagUrl:adLink
                                                                         adDisplayContainer:self.adDisplayContainer
+                                                                           contentPlayhead:self.playhead
                                                                                userContext:nil];
     
     [self.adsLoader requestAdsWithRequest:request];
@@ -92,7 +94,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor clearColor];
-    self.view.frame = (CGRect){0, 0, self.view.frame.size.width, _adPlayerHeight};
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,9 +146,11 @@
     return _adsLoader;
 }
 
-- (id<AVPlayerContentPlayhead>)playhead {
+- (id<IMAContentPlayhead>)playhead {
     if (!_playhead) {
-        _playhead = [[NSClassFromString(@"IMAAVPlayerContentPlayhead") alloc] initWithAVPlayer:self.contentPlayer];
+        KCustomPlayHead *customPlayhead = [[KCustomPlayHead alloc] init];
+        [customPlayhead setPlayer:self.contentPlayer];
+        _playhead = customPlayhead;
     }
     return _playhead;
 }
@@ -254,7 +257,9 @@
 
 - (void)adsManagerDidRequestContentPause:(id<AdsManager>)adsManager {
     // The SDK is going to play ads, so pause the content.
+    [self.view.superview bringSubviewToFront:self.view];
     [self.contentPlayer pause];
+    [self.view setHidden:NO];
     NSDictionary *eventParams = ContentPauseRequestedKey.nullVal;
     [self.delegate player:nil
                 eventName:eventParams.allKeys.firstObject
@@ -264,6 +269,7 @@
 - (void)adsManagerDidRequestContentResume:(id<AdsManager>)adsManager {
     // The SDK is done playing ads (at least for now), so resume the content.
     [self.contentPlayer play];
+    [self.view setHidden:YES];
     NSDictionary *eventParams = ContentResumeRequestedKey.nullVal;
     [self.delegate player:nil
                 eventName:eventParams.allKeys.firstObject

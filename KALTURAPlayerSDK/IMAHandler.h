@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+@protocol IMAContentPlayhead
+
+/**
+ *  Reflects the current playback time in seconds for the content.
+ *  The property is key value observable.
+ */
+@property(nonatomic, readonly) NSTimeInterval currentTime;
+
+@end
 
 @protocol AdDisplayContainer <NSObject>
 
@@ -21,6 +30,7 @@
 
 - (instancetype)initWithAdTagUrl:(NSString *)adTagUrl
               adDisplayContainer:(id<AdDisplayContainer>)adDisplayContainer
+                 contentPlayhead:(NSObject<IMAContentPlayhead> *)contentPlayhead
                      userContext:(id)userContext;
 
 @end
