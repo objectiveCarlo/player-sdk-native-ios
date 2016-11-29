@@ -268,7 +268,7 @@ NSString * const StatusKeyPath = @"status";
             }
         } else if (self.currentItem.isPlaybackLikelyToKeepUp) {
             KPLogTrace(@"PlaybackLikelyToKeepUp");
-            [self playerHanging];
+            [self stopBuffering];
         } else if (self.currentItem.isPlaybackBufferFull) {
             [self stopBuffering];
         }
