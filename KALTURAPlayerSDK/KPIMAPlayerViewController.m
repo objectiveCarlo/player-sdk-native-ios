@@ -117,7 +117,7 @@
 - (id<AdsRenderingSettings>)adsRenderingSettings {
     if (!_adsRenderingSettings) {
         _adsRenderingSettings = [NSClassFromString(@"IMAAdsRenderingSettings") new];
-        _adsRenderingSettings.webOpenerPresentingController = self;
+//        _adsRenderingSettings.webOpenerPresentingController = self;
         _adsRenderingSettings.webOpenerDelegate = _datasource;
     }
     return _adsRenderingSettings;

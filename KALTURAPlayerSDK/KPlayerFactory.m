@@ -51,6 +51,8 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
         _lastPosition = [self.player currentPlaybackTime];
         _backToForeground = YES;
         [_assetBuilder backToForeground];
+    } else {
+        [self play];
     }
     KPLogTrace(@"Exit backToForeground");
 }
