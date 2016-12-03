@@ -102,10 +102,9 @@
 /**
  *  Different event types sent by the IMAAdsManager to its delegate.
  */
-typedef NS_ENUM(NSInteger, IMAAdEventType){
-    /**
-     *  Ad break ready.
-     */
+typedef NS_ENUM(NSInteger, IMAAdEventType){    /**
+                                                *  Ad break ready.
+                                                */
     kIMAAdEvent_AD_BREAK_READY,
     /**
      *  Ad break ended (only used for dynamic ad insertion).
@@ -167,6 +166,7 @@ typedef NS_ENUM(NSInteger, IMAAdEventType){
      *  Third quartile of a linear ad was reached.
      */
     kIMAAdEvent_THIRD_QUARTILE
+
 };
 
 @protocol AdPodInfo <NSObject>

@@ -208,22 +208,22 @@
             self.adEventParams.adSystem = @"null";
             self.adEventParams.adPosition = event.ad.adPodInfo.adPosition;
             eventParams = self.adEventParams.toJSON.adLoaded;
-            
             break;
         case kIMAAdEvent_STARTED:
-            [self showMe];
             self.adEventParams.duration = event.ad.duration;
             eventParams = self.adEventParams.toJSON.adStart;
             break;
         case kIMAAdEvent_COMPLETE:
             self.adEventParams.adID = event.ad.adId;
             eventParams = self.adEventParams.toJSON.adCompleted;
-            [self hideMe];
             break;
         case kIMAAdEvent_ALL_ADS_COMPLETED:
             eventParams = AllAdsCompletedKey.nullVal;
             break;
         case kIMAAdEvent_FIRST_QUARTILE:
+            if ([self.view isHidden]) {
+                [self showMe];
+            }
             eventParams = FirstQuartileKey.nullVal;
             break;
         case kIMAAdEvent_MIDPOINT:

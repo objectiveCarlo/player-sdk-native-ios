@@ -16,6 +16,8 @@
 - (NSTimeInterval)currentTime {
     if (self.player) {
         Float64 dur = CMTimeGetSeconds([self.player currentTime]);
+        if (isnan(dur))
+            return -1;
         return dur;
         
     }
