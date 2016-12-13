@@ -409,7 +409,7 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
         [_castPlayer play];
     }
     
-    if (currentPlayerType == CurrentPlyerTypeDefault && [self.player respondsToSelector:@selector(play)]) {
+    if (self.adController.view.hidden && currentPlayerType == CurrentPlyerTypeDefault && [self.player respondsToSelector:@selector(play)]) {
         [self.player play];
     }
 }

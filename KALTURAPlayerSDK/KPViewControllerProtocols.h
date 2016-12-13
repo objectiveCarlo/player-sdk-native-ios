@@ -78,6 +78,7 @@ typedef enum{
 - (void)hidePlayer;
 - (void)selectAudioTrack:(int)trackId;
 - (void)selectTextTrack:(NSString *)locale;
+- (void)togglePictureInPicture;
 
 
 @end
