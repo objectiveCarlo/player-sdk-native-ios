@@ -10,6 +10,8 @@
 @import AVFoundation;
 
 #import "KPAssetHandler.h"
+extern NSString *const FAIRPLAY_LICENSE_WILL_LOAD;
+extern NSString *const FAIRPLAY_LICENSE_LOADED;
 
 @interface KPFairPlayHandler : NSObject <KPAssetHandler>
 

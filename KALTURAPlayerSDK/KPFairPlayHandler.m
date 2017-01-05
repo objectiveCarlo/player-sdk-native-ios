@@ -16,6 +16,9 @@ NSString* const SKD_URL_SCHEME_NAME = @"skd";
 NSString* const TAG = @"com.kaltura.playersdk.drm.fps";
 
 
+NSString* const FAIRPLAY_LICENSE_WILL_LOAD = @"FAIRPLAY_LICENSE_WILL_LOAD";
+NSString* const FAIRPLAY_LICENSE_LOADED = @"FAIRPLAY_LICENSE_LOADED";
+
 @interface KPFairPlayHandler () <AVAssetResourceLoaderDelegate>
 @property (nonatomic, copy) NSString* licenseUri;
 @property (nonatomic, copy) KPAssetReadyCallback assetReadyCallback;
@@ -78,7 +81,7 @@ static dispatch_queue_t	globalNotificationQueue( void )
     [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
     
     NSHTTPURLResponse* response = nil;
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:FAIRPLAY_LICENSE_WILL_LOAD object:nil];
     KPLogDebug(@"Sending license request");
     NSTimeInterval licenseResponseTime = [NSDate timeIntervalSinceReferenceDate];
     
@@ -86,6 +89,7 @@ static dispatch_queue_t	globalNotificationQueue( void )
     
     licenseResponseTime = [NSDate timeIntervalSinceReferenceDate] - licenseResponseTime;
     KPLogDebug(@"Received license response (%.3f)", licenseResponseTime);
+    [[NSNotificationCenter defaultCenter] postNotificationName:FAIRPLAY_LICENSE_LOADED object:nil];
     
     if (!responseData) {
         KPLogError(@"No license response, error=%@", *errorOut);
