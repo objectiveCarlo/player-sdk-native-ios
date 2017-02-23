@@ -152,25 +152,32 @@ static WViOsApiStatus widevineCallback(WViOsApiEvent event, NSDictionary *attrib
 
 }
 
-+ (void)initialize {
++ (void)initializeWithDefaultSettings {
+    NSDictionary* settings = @{
+                               WVPortalKey: WV_PORTAL_ID,
+                               WVAssetRootKey: NSHomeDirectory(),
+                               };
+    [self initializeWithSettings:settings force:NO];
+}
+
++ (void)initializeWithSettings:(NSDictionary *)settings force:(BOOL)force {
     
-    if (wvInitialized) {
+    if (wvInitialized && !force) {
         return;
     }
     
     @synchronized([self class]) {
         
-        if (wvInitialized) {
+        if (wvInitialized && !force) {
             return;
+        } else {
+            if (force && wvInitialized) {
+                WV_Terminate();
+            }
         }
         
         wvInitialized = @NO;
         assetBlocks = [NSMutableDictionary new];
-        
-        NSDictionary* settings = @{
-                                   WVPortalKey: WV_PORTAL_ID,
-                                   WVAssetRootKey: NSHomeDirectory(),
-                                   };
         
         WViOsApiStatus wvStatus = WV_Initialize(widevineCallback, settings);
         KPLogDebug(@"WV_Initialize status: %d", wvStatus);

@@ -24,7 +24,8 @@ typedef void(^KCDMReadyToPlayBlock)(NSString* playbackURL);
 
 
 @interface WidevineClassicCDM : NSObject
-
++ (void)initializeWithDefaultSettings;
++ (void)initializeWithSettings:(NSDictionary *)settings force:(BOOL)force;
 +(void)setEventBlock:(KCDMAssetEventBlock)block forAsset:(NSString*)assetUri;
 
 +(void)registerLocalAsset:(NSString*)assetUri withLicenseUri:(NSString*)licenseUri;
