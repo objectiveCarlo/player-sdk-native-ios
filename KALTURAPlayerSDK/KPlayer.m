@@ -256,7 +256,11 @@ NSString * const StatusKeyPath = @"status";
 
     NSNumber *oldValue = [change valueForKey:NSKeyValueChangeOldKey];
     NSNumber *newValue = [change valueForKey:NSKeyValueChangeNewKey];
-
+     NSArray<AVMetadataItem *> *timedMetadata = self.currentItem.timedMetadata;
+    
+    if (timedMetadata) {
+        NSLog(@"%@",timedMetadata);
+    }
     if (object == self.currentItem &&
             ([keyPath isEqualToString:playbackBufferEmptyKeyPath] ||
                     [keyPath isEqualToString:playbackLikelyToKeepUpKeyPath] ||
@@ -591,6 +595,8 @@ NSString * const StatusKeyPath = @"status";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     @try {
         [self removeObserver:self forKeyPath:RateKeyPath context:nil];
+        [self reset];
+        [self replaceCurrentItemWithPlayerItem:nil];
     }
     @catch (NSException *exception) {
         KPLogError(@"%@", exception);
