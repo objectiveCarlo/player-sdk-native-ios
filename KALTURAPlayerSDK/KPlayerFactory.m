@@ -108,6 +108,10 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
     [_assetBuilder setContentUrl:src];
 }
 
+- (void)setLocalStorage:(id)localStorage {
+    [_assetBuilder setLocalStorage:localStorage];
+}
+
 -(void)selectAudioTrack:(int)trackId{
     KPLogDebug(@"Change audio track Id:%@",trackId);
     [_player selectAudioTrack:trackId];

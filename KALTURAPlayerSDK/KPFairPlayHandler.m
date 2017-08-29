@@ -131,7 +131,9 @@ static dispatch_queue_t	globalNotificationQueue( void )
 }
 
 
-
+- (NSString *)localKey:(NSString *)assetId {
+    return [NSString stringWithFormat:@"FAIRPLAY2:%@", assetId];
+}
 - (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest {
     AVAssetResourceLoadingDataRequest *dataRequest = loadingRequest.dataRequest;
     NSURL *url = loadingRequest.request.URL;
@@ -161,48 +163,96 @@ static dispatch_queue_t	globalNotificationQueue( void )
         return NO;
     }
     
+    NSDictionary *options = nil;
+    if (self.forOffline) {
+        
+        if (loadingRequest.contentInformationRequest) {
+            loadingRequest.contentInformationRequest.contentType = AVStreamingKeyDeliveryPersistentContentKeyType;
+        }
+        
+        options = [NSDictionary dictionaryWithObjectsAndKeys:@YES, AVAssetResourceLoadingRequestStreamingContentKeyRequestRequiresPersistentKey, nil];
+        
+        
+    }
+    
+    
+    if (self.localStorage) {
+        NSData *cachedLicense = [self.localStorage load:[self localKey:assetId]];
+        
+        if (cachedLicense && dataRequest) {
+            [dataRequest respondWithData:cachedLicense];
+            [loadingRequest finishLoading];
+            return YES;
+        }
+    }
+    
     // Get SPC
     NSData *requestBytes = [loadingRequest streamingContentKeyRequestDataForApp:self.certificate
                                                       contentIdentifier:[assetId dataUsingEncoding:NSUTF8StringEncoding]
-                                                                options:nil
+                                                                options:options
                                                                   error:&error];
     
     NSTimeInterval expiryDuration = 0.0;
+    
+    if (error) {
+        NSLog(@"%@",error);
+    
+    }
     
     // Send the SPC message to the Key Server.
     NSData *responseData = [self getContentKeyAndLeaseExpiryfromKeyServerModuleWithRequest:requestBytes
                                                              contentIdentifierHost:assetId
                                                                leaseExpiryDuration:&expiryDuration
                                                                              error:&error];
+
     
     // The Key Server returns the CK inside an encrypted Content Key Context (CKC) message in response to
     // the app’s SPC message.  This CKC message, containing the CK, was constructed from the SPC by a
     // Key Security Module in the Key Server’s software.
     if (responseData != nil) {
         
-        // Provide the CKC message (containing the CK) to the loading request.
-        [dataRequest respondWithData:responseData];
-        
-        // Get the CK expiration time from the CKC. This is used to enforce the expiration of the CK.
-        if (expiryDuration != 0.0) {
+           if (self.forOffline) {
+               
+                NSError *error = nil;
+                NSData *offlineData = [loadingRequest persistentContentKeyFromKeyVendorResponse:responseData options:nil error:&error];
+               
+               if (error) {
+                   NSLog(@"%@",error);
+               } else {
+                   if (offlineData && self.localStorage) {
+                       [self.localStorage save:[self localKey:assetId] value: offlineData];
+                       [dataRequest respondWithData:offlineData];
+                 
+                   }
+               }
+               
             
-            AVAssetResourceLoadingContentInformationRequest *infoRequest = loadingRequest.contentInformationRequest;
-            if (infoRequest) {
-                
-                // Set the date at which a renewal should be triggered.
-                // Before you finish loading an AVAssetResourceLoadingRequest, if the resource
-                // is prone to expiry you should set the value of this property to the date at
-                // which a renewal should be triggered. This value should be set sufficiently
-                // early enough to allow an AVAssetResourceRenewalRequest, delivered to your
-                // delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to
-                // finish before the actual expiry time. Otherwise media playback may fail.
-                infoRequest.renewalDate = [NSDate dateWithTimeIntervalSinceNow:expiryDuration];
-                
-                infoRequest.contentType = @"application/octet-stream";
-                infoRequest.contentLength = responseData.length;
-                infoRequest.byteRangeAccessSupported = NO;
-            }
-        }
+           } else {
+        
+        // Provide the CKC message (containing the CK) to the loading request.
+               [dataRequest respondWithData:responseData];
+           }
+        
+//        // Get the CK expiration time from the CKC. This is used to enforce the expiration of the CK.
+//        if (expiryDuration != 0.0) {
+//            
+//            AVAssetResourceLoadingContentInformationRequest *infoRequest = loadingRequest.contentInformationRequest;
+//            if (infoRequest) {
+//                
+//                // Set the date at which a renewal should be triggered.
+//                // Before you finish loading an AVAssetResourceLoadingRequest, if the resource
+//                // is prone to expiry you should set the value of this property to the date at
+//                // which a renewal should be triggered. This value should be set sufficiently
+//                // early enough to allow an AVAssetResourceRenewalRequest, delivered to your
+//                // delegate via -resourceLoader:shouldWaitForRenewalOfRequestedResource:, to
+//                // finish before the actual expiry time. Otherwise media playback may fail.
+//                infoRequest.renewalDate = [NSDate dateWithTimeIntervalSinceNow:expiryDuration];
+//                
+//                infoRequest.contentType = @"application/octet-stream";
+//                infoRequest.contentLength = responseData.length;
+//                infoRequest.byteRangeAccessSupported = NO;
+//            }
+//        }
         [loadingRequest finishLoading]; // Treat the processing of the request as complete.
     }
     else {

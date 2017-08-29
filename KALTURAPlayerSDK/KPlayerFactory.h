@@ -50,6 +50,7 @@ static NSString *PostrollEndedKey = @"postEnded";
 - (void)selectAudioTrack:(int)trackId;
 - (void)selectTextTrack:(NSString *)locale;
 - (void)removeAdController;
+- (void)setLocalStorage:(id)localStorage;
 
 
 - (void)sendCastRecieverTextMessage:(NSString *)message;

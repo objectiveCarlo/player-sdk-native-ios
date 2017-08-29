@@ -21,7 +21,7 @@ typedef void(^KPAssetReadyCallback)(AVURLAsset* avAsset);
 
 -(BOOL)requiresBackToForegroundHandling;
 -(void)backToForeground;
-
+- (void)setLocalStorage:(id)localStorage;
 +(NSDictionary*)supportedMediaFormats;
 
 @end

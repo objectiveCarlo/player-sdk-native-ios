@@ -95,6 +95,12 @@
 -(void)setLicenseUri:(NSString *)licenseUri {
     [_assetHandler setLicenseUri:licenseUri];
 }
-
+- (void)setLocalStorage:(id)localStorage {
+    if ([_assetHandler isKindOfClass:[KPFairPlayHandler class]]) {
+        KPFairPlayHandler *fairplay = (KPFairPlayHandler *)_assetHandler;
+        [fairplay setLocalStorage:localStorage];
+        [fairplay setForOffline:localStorage != nil];
+    }
+}
 @end
 
