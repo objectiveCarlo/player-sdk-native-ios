@@ -38,7 +38,6 @@ typedef NS_ENUM(NSInteger, CurrentPlyerType) {
 @property (nonatomic, strong) UIViewController *parentViewController;
 @property (nonatomic) BOOL isContentEnded;
 @property (nonatomic) BOOL isAllAdsCompleted;
-@property (nonatomic, retain) KPAssetBuilder* assetBuilder;
 @property (nonatomic, strong) id<KCastMediaRemoteControl> castPlayer;
 @end
 

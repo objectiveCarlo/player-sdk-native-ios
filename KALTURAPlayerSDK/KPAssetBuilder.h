@@ -11,8 +11,10 @@
 
 
 typedef void(^KPAssetReadyCallback)(AVURLAsset* avAsset);
-
+@protocol KPAssetHandler;
 @interface KPAssetBuilder : NSObject
+
+@property (nonatomic, retain) id<KPAssetHandler> assetHandler;
 
 -(instancetype)initWithReadyCallback:(KPAssetReadyCallback)callback;
 -(void)setContentUrl:(NSString*)url;

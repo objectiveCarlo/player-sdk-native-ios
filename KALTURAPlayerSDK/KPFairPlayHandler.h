@@ -12,15 +12,23 @@
 #import "KPAssetHandler.h"
 extern NSString *const FAIRPLAY_LICENSE_WILL_LOAD;
 extern NSString *const FAIRPLAY_LICENSE_LOADED;
-@protocol KPFairPlayLocalStorage;
+@protocol KPFairPlayLocalStorage,KPFairPlayLocalListener;
 @interface KPFairPlayHandler : NSObject <KPAssetHandler>
 
 @property (nonatomic, assign) BOOL forOffline;
+@property (nonatomic, strong) NSString *forOfflineListenerKey;
+@property (nonatomic, strong) NSString *forOfflineAssetId;
 @property (nonatomic, assign) id<KPFairPlayLocalStorage> localStorage;
+@property (nonatomic, assign) id<KPFairPlayLocalListener> localListener;
 
 @end
 
 @protocol KPFairPlayLocalStorage <NSObject>
 - (NSData *)load:(NSString *)key;
 - (void)save:(NSString *)key value:(NSData *)data;
+@end
+
+@protocol KPFairPlayLocalListener <NSObject>
+- (void)localListenerOK:(NSString *)key expiration:(NSTimeInterval)expiration localKey:(NSString *)localKey;
+- (void)localListenerNotOK:(NSString *)key;
 @end

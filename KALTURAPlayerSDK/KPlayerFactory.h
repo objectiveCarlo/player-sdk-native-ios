@@ -32,7 +32,7 @@ static NSString *PostrollEndedKey = @"postEnded";
 @protocol KPlayerFactoryDelegate <KPlayerDelegate>
 - (void)allAdsCompleted;
 @end
-
+@class KPAssetBuilder;
 @interface KPlayerFactory : NSObject 
 
 - (instancetype)initWithPlayerClassName:(NSString *)className;
@@ -70,5 +70,7 @@ static NSString *PostrollEndedKey = @"postEnded";
 @property (nonatomic, strong) KPIMAPlayerViewController *adController;
 @property (nonatomic, strong) id kIMAWebOpenerDelegate;
 @property (nonatomic, assign) BOOL preferSubtitles;
+
+@property (nonatomic, retain) KPAssetBuilder* assetBuilder;
 
 @end

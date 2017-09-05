@@ -142,12 +142,16 @@ static dispatch_queue_t	globalNotificationQueue( void )
     
     // Must be a non-standard URI scheme for AVFoundation to invoke your AVAssetResourceLoader delegate
     // for help in loading it.
-    if (![[url scheme] isEqual:SKD_URL_SCHEME_NAME]) {
+    if (![[url scheme] isEqual:SKD_URL_SCHEME_NAME] && !self.forOfflineAssetId) {
         return NO;
     }
     
     // Use the SKD URL as assetId.
     NSString *assetId = url.host;
+    
+    if (self.forOfflineAssetId) {
+        assetId = self.forOfflineAssetId;
+    }
     
     // Wait for licenseUri and certificate, up to 5 seconds. In particular, the certificate might not be ready yet.
     // TODO: a better way of doing it is semaphores of some kind. 
@@ -218,11 +222,16 @@ static dispatch_queue_t	globalNotificationQueue( void )
                
                if (error) {
                    NSLog(@"%@",error);
+                   if (self.localListener) {
+                       [self.localListener localListenerNotOK:self.forOfflineListenerKey];
+                   }
                } else {
                    if (offlineData && self.localStorage) {
                        [self.localStorage save:[self localKey:assetId] value: offlineData];
                        [dataRequest respondWithData:offlineData];
-                 
+                       if (self.localListener) {
+                           [self.localListener localListenerOK:self.forOfflineListenerKey expiration:expiryDuration localKey:assetId];
+                       }
                    }
                }
                
@@ -257,6 +266,10 @@ static dispatch_queue_t	globalNotificationQueue( void )
     }
     else {
         [loadingRequest finishLoadingWithError:error];
+        
+        if (self.localListener) {
+            [self.localListener localListenerNotOK:self.forOfflineListenerKey];
+        }
     }
     
     handled = YES;	// Request has been handled regardless of whether server returned an error.

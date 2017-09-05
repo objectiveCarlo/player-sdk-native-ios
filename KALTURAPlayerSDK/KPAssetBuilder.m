@@ -18,7 +18,6 @@
 
 @interface KPAssetBuilder ()
 @property (nonatomic, copy) KPAssetReadyCallback assetReadyCallback;
-@property (nonatomic, retain) id<KPAssetHandler> assetHandler;
 
 @end
 
@@ -74,7 +73,13 @@
 }
 
 -(void)setContentUrl:(NSString*)url {
-    NSURL* contentUrl = [NSURL URLWithString:url];
+    NSURL* contentUrl = nil;
+    
+    if ([url hasPrefix:@"http"]) {
+        contentUrl = [NSURL URLWithString:url];
+    } else {
+        contentUrl = [NSURL fileURLWithPath:url isDirectory:YES];
+    }
     
     if (!contentUrl) {
         KPLogError(@"Failed parsing content url, can't continue");
