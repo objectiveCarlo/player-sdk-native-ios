@@ -13,13 +13,16 @@
 extern NSString *const FAIRPLAY_LICENSE_WILL_LOAD;
 extern NSString *const FAIRPLAY_LICENSE_LOADED;
 @protocol KPFairPlayLocalStorage,KPFairPlayLocalListener;
-@interface KPFairPlayHandler : NSObject <KPAssetHandler>
+@interface KPFairPlayHandler : NSObject <KPAssetHandler, AVAssetResourceLoaderDelegate>
 
 @property (nonatomic, assign) BOOL forOffline;
 @property (nonatomic, strong) NSString *forOfflineListenerKey;
 @property (nonatomic, strong) NSString *forOfflineAssetId;
 @property (nonatomic, assign) id<KPFairPlayLocalStorage> localStorage;
 @property (nonatomic, assign) id<KPFairPlayLocalListener> localListener;
+
+
+- (dispatch_queue_t) getDefaultQueue;
 
 @end
 
