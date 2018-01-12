@@ -39,6 +39,10 @@ static dispatch_queue_t	globalNotificationQueue( void )
 
 @implementation KPFairPlayHandler
 
+- (dispatch_queue_t)getDefaultQueue {
+    return globalNotificationQueue();
+}
+
 -(void)setAssetParam:(NSString*)key toValue:(id)value {
     switch (key.attributeEnumFromString) {
         case fpsCertificate:
