@@ -33,5 +33,5 @@ extern NSString *const FAIRPLAY_LICENSE_LOADED;
 
 @protocol KPFairPlayLocalListener <NSObject>
 - (void)localListenerOK:(NSString *)key expiration:(NSTimeInterval)expiration localKey:(NSString *)localKey;
-- (void)localListenerNotOK:(NSString *)key;
+- (void)localListenerNotOK:(NSString *)key localKey:(NSString *)localKey;
 @end

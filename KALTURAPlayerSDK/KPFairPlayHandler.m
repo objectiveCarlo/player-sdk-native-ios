@@ -184,7 +184,7 @@ static dispatch_queue_t	globalNotificationQueue( void )
     }
     
     
-    if (self.localStorage) {
+    if (self.localStorage && !self.localListener) {
         NSData *cachedLicense = [self.localStorage load:[self localKey:assetId]];
         
         if (cachedLicense && dataRequest) {
@@ -227,7 +227,7 @@ static dispatch_queue_t	globalNotificationQueue( void )
                if (error) {
                    NSLog(@"%@",error);
                    if (self.localListener) {
-                       [self.localListener localListenerNotOK:self.forOfflineListenerKey];
+                       [self.localListener localListenerNotOK:self.forOfflineListenerKey localKey:assetId];
                    }
                } else {
                    if (offlineData && self.localStorage) {
@@ -272,7 +272,7 @@ static dispatch_queue_t	globalNotificationQueue( void )
         [loadingRequest finishLoadingWithError:error];
         
         if (self.localListener) {
-            [self.localListener localListenerNotOK:self.forOfflineListenerKey];
+            [self.localListener localListenerNotOK:self.forOfflineListenerKey localKey:assetId];
         }
     }
     
