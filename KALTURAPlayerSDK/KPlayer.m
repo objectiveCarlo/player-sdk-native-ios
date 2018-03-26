@@ -49,6 +49,9 @@ NSString * const StatusKeyPath = @"status";
 @synthesize isIdle = _isIdle;
 @synthesize shouldPlay = _shouldPlay;
 
+- (AVPlayerLayer *)getMeSomeLayer {
+    return _layer;
+}
 - (instancetype)initWithParentView:(UIView *)parentView {
     self = [super init];
     [self createAudioSession];
