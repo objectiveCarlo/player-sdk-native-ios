@@ -79,7 +79,7 @@ typedef enum{
 - (void)selectAudioTrack:(int)trackId;
 - (void)selectTextTrack:(NSString *)locale;
 - (void)togglePictureInPicture;
-
+- (AVPlayerLayer *)getMeSomeLayer;
 
 @end
 
