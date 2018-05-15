@@ -102,6 +102,9 @@ NSString * const StatusKeyPath = @"status";
         // Update on getting the view
         UIView *aPlayerView = _parentView.subviews.lastObject;
         UIView *videoContainerView = [aPlayerView viewWithTag:8888];
+        if (videoContainerView == nil) {
+            videoContainerView = [_parentView viewWithTag:8888];
+        }
         [videoContainerView.layer.sublayers.firstObject removeFromSuperlayer];
         [videoContainerView.layer addSublayer:_layer];
         _layer.videoGravity = AVLayerVideoGravityResizeAspect;
