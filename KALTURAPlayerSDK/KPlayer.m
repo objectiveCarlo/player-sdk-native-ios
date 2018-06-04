@@ -512,10 +512,12 @@ NSString * const StatusKeyPath = @"status";
               context:nil];
 
     if (self.currentItem != item) {
-        [self replaceCurrentItemWithPlayerItem:item];
-        if (!self.layer.superlayer) {
-            [self addPlayerToView];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self replaceCurrentItemWithPlayerItem:item];
+            if (!self.layer.superlayer) {
+                [self addPlayerToView];
+            }
+        });
     }
 }
 
