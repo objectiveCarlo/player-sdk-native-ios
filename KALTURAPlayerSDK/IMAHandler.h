@@ -38,6 +38,7 @@
 @protocol Settings <NSObject>
 
 @property (nonatomic, copy) NSString *language;
+@property (nonatomic, assign) BOOL enableOmidExperimentally;
 
 @end
 

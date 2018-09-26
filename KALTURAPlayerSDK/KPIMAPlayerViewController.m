@@ -139,6 +139,7 @@
         if (![_locale isKindOfClass:[NSNull class]] && _locale.length) {
             settings = [NSClassFromString(@"IMASettings") new];
             settings.language = _locale;
+            settings.enableOmidExperimentally = YES;
         }
         _adsLoader = [(id<AdsLoader>)[NSClassFromString(@"IMAAdsLoader") alloc] initWithSettings:settings];
         _adsLoader.delegate = self;
