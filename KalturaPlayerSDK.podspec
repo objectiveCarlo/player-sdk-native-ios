@@ -31,7 +31,7 @@ s.authors             = { "Eliza Sapir" => "eliza.sapir@gmail.com", "Nissim Pard
 
 # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 s.source       = { :git => 'https://github.com/kaltura/player-sdk-native-ios.git', :tag => 'v' + s.version.to_s }
-s.libraries      = 'stdc++', 'z', 'System', 'xml2.2', 'c++', 'xml2'
+s.libraries      = 'z', 'System', 'xml2.2', 'c++', 'xml2'
 s.framework    = 'MediaPlayer', 'SystemConfiguration', 'QuartzCore', 'CoreFoundation', 'AVFoundation', 'AudioToolbox', 'CFNetwork', 'AdSupport', 'WebKit', 'MessageUI', 'Social', 'MediaAccessibility', 'Foundation', 'CoreGraphics', 'UIKit'
 
 s.requires_arc = true
