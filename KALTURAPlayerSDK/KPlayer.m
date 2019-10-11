@@ -576,6 +576,15 @@ NSString * const StatusKeyPath = @"status";
     return _currentPlaybackTime;
 }
 
+- (MPRemoteCommandHandlerStatus)playWithRemote:(MPRemoteCommandEvent *)event{
+    [self play];
+    return MPRemoteCommandHandlerStatusSuccess;
+}
+- (MPRemoteCommandHandlerStatus)pauseWithRemote:(MPRemoteCommandEvent *)event{
+    [self pause];
+    return MPRemoteCommandHandlerStatusSuccess;
+}
+
 - (void)play {
     if (_isIdle) {
         return;
@@ -715,11 +724,11 @@ NSString * const StatusKeyPath = @"status";
     if(!isEnablingTracks) {
         [MPRemoteCommandCenter sharedCommandCenter].playCommand.enabled = YES;
         [[MPRemoteCommandCenter sharedCommandCenter].playCommand removeTarget:self];
-        [[MPRemoteCommandCenter sharedCommandCenter].playCommand addTarget:self action:@selector(play)];
+        [[MPRemoteCommandCenter sharedCommandCenter].playCommand addTarget:self action:@selector(playWithRemote:)];
 
         [MPRemoteCommandCenter sharedCommandCenter].pauseCommand.enabled = YES;
         [[MPRemoteCommandCenter sharedCommandCenter].pauseCommand removeTarget:self];
-        [[MPRemoteCommandCenter sharedCommandCenter].pauseCommand addTarget:self action:@selector(pause)];
+        [[MPRemoteCommandCenter sharedCommandCenter].pauseCommand addTarget:self action:@selector(pauseWithRemote:)];
     }
 
     KPLogTrace(@"Exit");
