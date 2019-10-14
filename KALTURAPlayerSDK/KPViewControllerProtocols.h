@@ -43,7 +43,8 @@ typedef enum{
     captions,
     audioTrackSelected,
     textTrackSelected,
-    chromecastAppId
+    chromecastAppId,
+    fpsRawLicense
 } Attribute;
 
 @protocol KPlayerDelegate;

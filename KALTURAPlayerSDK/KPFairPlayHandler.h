@@ -16,6 +16,7 @@ extern NSString *const FAIRPLAY_LICENSE_LOADED;
 @interface KPFairPlayHandler : NSObject <KPAssetHandler, AVAssetResourceLoaderDelegate>
 
 @property (nonatomic, assign) BOOL forOffline;
+@property (nonatomic, assign) BOOL rawLicenseRequest;
 @property (nonatomic, strong) NSString *forOfflineListenerKey;
 @property (nonatomic, strong) NSString *forOfflineAssetId;
 @property (nonatomic, assign) id<KPFairPlayLocalStorage> localStorage;

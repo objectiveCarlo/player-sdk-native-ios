@@ -79,7 +79,8 @@ NSString *const LocalContentId = @"localContentId";
                             @"captions",
                             @"audioTrackSelected",
                             @"textTrackSelected",
-                            @"chromecastAppId"];
+                            @"chromecastAppId",
+                            @"fpsRawLicense"];
     KPLogTrace(@"Exit");
     return (Attribute)[attributes indexOfObject:self];
 }

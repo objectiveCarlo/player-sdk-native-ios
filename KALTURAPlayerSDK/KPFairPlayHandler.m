@@ -49,6 +49,9 @@ static dispatch_queue_t	globalNotificationQueue( void )
             // value is a base64-encoded string
             _certificate = [[NSData alloc] initWithBase64EncodedString:value options:0];
             break;
+        case fpsRawLicense:
+            self.rawLicenseRequest = [value boolValue];
+            break;
             
         default:
             KPLogWarn(@"Ignoring unknown asset param %@", key);
@@ -81,7 +84,11 @@ static dispatch_queue_t	globalNotificationQueue( void )
     NSURL* reqUrl = [NSURL URLWithString:licenseUri];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:reqUrl];
     request.HTTPMethod=@"POST";
-    request.HTTPBody=[requestBytes base64EncodedDataWithOptions:0];
+    if (!self.rawLicenseRequest) {
+        request.HTTPBody=[requestBytes base64EncodedDataWithOptions:0];
+    } else {
+        request.HTTPBody=requestBytes;
+    }
     [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
     
     NSHTTPURLResponse* response = nil;
@@ -99,11 +106,14 @@ static dispatch_queue_t	globalNotificationQueue( void )
         KPLogError(@"No license response, error=%@", *errorOut);
         return nil;
     }
+    if (self.rawLicenseRequest) {
+        return responseData;
+    }
         
     NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:errorOut];
-    if (!dict) {
+    if (!dict || [dict allKeys].count == 0) {
         KPLogError(@"Invalid license response, error=%@", *errorOut);
-        return nil;
+        return responseData;
     }
     
     NSString* errMessage = dict[@"message"];
