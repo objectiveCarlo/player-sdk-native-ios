@@ -23,6 +23,7 @@ NSString* const FAIRPLAY_LICENSE_LOADED = @"FAIRPLAY_LICENSE_LOADED";
 @property (nonatomic, copy) NSString* licenseUri;
 @property (nonatomic, copy) KPAssetReadyCallback assetReadyCallback;
 @property (nonatomic, copy) NSData* certificate;
+@property (nonatomic, copy) NSString* certificateURL;
 @end
 
 static dispatch_queue_t	globalNotificationQueue( void )
@@ -47,7 +48,12 @@ static dispatch_queue_t	globalNotificationQueue( void )
     switch (key.attributeEnumFromString) {
         case fpsCertificate:
             // value is a base64-encoded string
-            _certificate = [[NSData alloc] initWithBase64EncodedString:value options:0];
+            if ([value rangeOfString:@"http"].location == 0) {
+                _certificateURL = [NSString stringWithString:value];
+                [self requestLicense];
+            } else {
+                _certificate = [[NSData alloc] initWithBase64EncodedString:value options:0];
+            }
             break;
         case fpsRawLicense:
             self.rawLicenseRequest = [value boolValue];
@@ -57,6 +63,32 @@ static dispatch_queue_t	globalNotificationQueue( void )
             KPLogWarn(@"Ignoring unknown asset param %@", key);
             break;
     }
+}
+
+- (void)requestLicense{
+
+    NSURL *url = [NSURL URLWithString:_certificateURL];
+
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = @"GET";
+
+        
+        NSURLSessionDataTask *downloadTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if (!error) {
+                NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+                if (httpResp.statusCode == 200) {
+                    self.certificate = data;
+                    
+                }
+            }
+
+        }];
+    
+    [downloadTask resume];
+        
 }
 
 -(instancetype)initWithAssetReadyCallback:(KPAssetReadyCallback)callback {
