@@ -103,71 +103,101 @@
 /**
  *  Different event types sent by the IMAAdsManager to its delegate.
  */
-typedef NS_ENUM(NSInteger, IMAAdEventType){    /**
-                                                *  Ad break ready.
-                                                */
-    kIMAAdEvent_AD_BREAK_READY,
-    /**
-     *  Ad break ended (only used for dynamic ad insertion).
-     */
-    kIMAAdEvent_AD_BREAK_ENDED,
-    /**
-     *  Ad break started (only used for dynamic ad insertion).
-     */
-    kIMAAdEvent_AD_BREAK_STARTED,
-    /**
-     *  All ads managed by the ads manager have completed.
-     */
-    kIMAAdEvent_ALL_ADS_COMPLETED,
-    /**
-     *  Ad clicked.
-     */
-    kIMAAdEvent_CLICKED,
-    /**
-     *  Single ad has finished.
-     */
-    kIMAAdEvent_COMPLETE,
-    /**
-     *  Cuepoints changed for VOD stream (only used for dynamic ad insertion).
-     */
-    kIMAAdEvent_CUEPOINTS_CHANGED,
-    /**
-     *  First quartile of a linear ad was reached.
-     */
-    kIMAAdEvent_FIRST_QUARTILE,
-    /**
-     *  An ad was loaded.
-     */
-    kIMAAdEvent_LOADED,
-    /**
-     *  Midpoint of a linear ad was reached.
-     */
-    kIMAAdEvent_MIDPOINT,
-    /**
-     *  Ad paused.
-     */
-    kIMAAdEvent_PAUSE,
-    /**
-     *  Ad resumed.
-     */
-    kIMAAdEvent_RESUME,
-    /**
-     *  Ad has skipped.
-     */
-    kIMAAdEvent_SKIPPED,
-    /**
-     *  Ad has started.
-     */
-    kIMAAdEvent_STARTED,
-    /**
-     *  Ad tapped.
-     */
-    kIMAAdEvent_TAPPED,
-    /**
-     *  Third quartile of a linear ad was reached.
-     */
-    kIMAAdEvent_THIRD_QUARTILE
-
+typedef NS_ENUM(NSInteger, IMAAdEventType){
+  /**
+   *  Ad break ready.
+   */
+  kIMAAdEvent_AD_BREAK_READY,
+  /**
+   *  Ad break will not play back any ads.
+   */
+  kIMAAdEvent_AD_BREAK_FETCH_ERROR,
+  /**
+   *  Ad break ended (only used for dynamic ad insertion).
+   */
+  kIMAAdEvent_AD_BREAK_ENDED,
+  /**
+   *  Ad break started (only used for dynamic ad insertion).
+   */
+  kIMAAdEvent_AD_BREAK_STARTED,
+  /**
+   *  Ad period ended (only used for dynamic ad insertion).
+   */
+  kIMAAdEvent_AD_PERIOD_ENDED,
+  /**
+   *  Ad period started is fired when an ad period starts. This includes the
+   *  entire ad break including slate as well. This event will be fired even for
+   *  ads that are being replayed or when seeking to the middle of an ad break.
+   *  (only used for dynamic ad insertion).
+   */
+  kIMAAdEvent_AD_PERIOD_STARTED,
+  /**
+   *  All ads managed by the ads manager have completed.
+   */
+  kIMAAdEvent_ALL_ADS_COMPLETED,
+  /**
+   *  Ad clicked.
+   */
+  kIMAAdEvent_CLICKED,
+  /**
+   *  Single ad has finished.
+   */
+  kIMAAdEvent_COMPLETE,
+  /**
+   *  Cuepoints changed for VOD stream (only used for dynamic ad insertion).
+   *  For this event, the <code>IMAAdEvent.adData</code> property contains a list of
+   *  <code>IMACuepoint</code>s at <code>IMAAdEvent.adData[@"cuepoints"]</code>.
+   */
+  kIMAAdEvent_CUEPOINTS_CHANGED,
+  /**
+   *  First quartile of a linear ad was reached.
+   */
+  kIMAAdEvent_FIRST_QUARTILE,
+  /**
+   *  An ad was loaded.
+   */
+  kIMAAdEvent_LOADED,
+  /**
+   *  A log event for the ads being played. These are typically non fatal errors.
+   */
+  kIMAAdEvent_LOG,
+  /**
+   *  Midpoint of a linear ad was reached.
+   */
+  kIMAAdEvent_MIDPOINT,
+  /**
+   *  Ad paused.
+   */
+  kIMAAdEvent_PAUSE,
+  /**
+   *  Ad resumed.
+   */
+  kIMAAdEvent_RESUME,
+  /**
+   *  Ad has skipped.
+   */
+  kIMAAdEvent_SKIPPED,
+  /**
+   *  Ad has started.
+   */
+  kIMAAdEvent_STARTED,
+  /**
+   *  Stream request has loaded (only used for dynamic ad insertion).
+   */
+  kIMAAdEvent_STREAM_LOADED,
+  /**
+   *  Stream has started playing (only used for dynamic ad insertion). Start
+   *  Picture-in-Picture here if applicable.
+   */
+  kIMAAdEvent_STREAM_STARTED,
+  /**
+   *  Ad tapped.
+   */
+  kIMAAdEvent_TAPPED,
+  /**
+   *  Third quartile of a linear ad was reached.
+   */
+  kIMAAdEvent_THIRD_QUARTILE
 };
 
 @protocol AdPodInfo <NSObject>
