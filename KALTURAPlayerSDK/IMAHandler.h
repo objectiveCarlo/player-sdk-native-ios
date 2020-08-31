@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+@class IMACompanionAdSlot;
 @protocol IMAContentPlayhead
 
 /**
@@ -22,7 +23,8 @@
 @protocol AdDisplayContainer <NSObject>
 
 - (instancetype)initWithAdContainer:(UIView *)adContainer
-                     companionSlots:(NSArray *)companionSlots;
+                     viewController:(nullable UIViewController *)adContainerViewController
+                     companionSlots:(nullable NSArray<IMACompanionAdSlot *> *)companionSlots;
 
 @end
 
